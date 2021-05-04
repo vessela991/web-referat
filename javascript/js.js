@@ -4,19 +4,19 @@ window.onbeforeunload = function () {
 
 function showHtmlDiv(id) {
     
-    var allArticles = document.getElementsByTagName('article');
+    var allSections = document.getElementsByTagName('section');
 
-    for (article of allArticles) {
-        var btnId = article.id + "-btn";
+    for (section of allSections) {
+        var btnId = section.id + "-btn";
         var btn = document.getElementById(btnId);
-        if (article.id === id) {
-            article.classList.remove("display-none");
-            article.classList.add("display-flex");
+        if (section.id === id) {
+            section.classList.remove("display-none");
+            section.classList.add("display-flex");
             window.scrollTo(0,0);
             btn.classList.add("button-active")
         } else {
-            article.classList.remove("display-flex");
-            article.classList.add("display-none");
+            section.classList.remove("display-flex");
+            section.classList.add("display-none");
             btn.classList.remove("button-active")
         }
     }

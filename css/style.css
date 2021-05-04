@@ -1,6 +1,11 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.section {
+    padding-top: 4em!important;
 }
 
 .button {
@@ -14,7 +19,6 @@
     font-size: 1.25em;
     margin: auto;
     cursor: pointer;
-    font-family: Georgia, serif;
 }
 
 .button-active {
@@ -29,8 +33,17 @@
     width: 100%
 }
 
+.references {
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
 .display-none {
     display: none;
+}
+
+.position {
+    text-align: center;
 }
 
 .display-flex {
@@ -42,19 +55,18 @@
     padding: 3em;
 }
 
-.article-paragraph {
+.section-paragraph {
     text-indent: 3em;
     line-height: 1.5em;
     font-size: 1.2em;
-    font-family: Georgia, serif;
+    margin-bottom: 1.2em;
 }
 
-.article-header {
+.section-header {
     text-align: center;
     margin-top: 1em;
     margin-bottom: 1em;
     font-size: 1.7em;
-    font-family: Georgia, serif;
 }
 
 .image {
@@ -72,6 +84,7 @@
 .logo {
     width: 6%;
     margin-bottom: -0.9em;
+    cursor: pointer;
 }
 
 .footer {
@@ -82,39 +95,26 @@
     left: 0;
     bottom: 0;
     width: 100%;
+    padding: 0.6em;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.link {
+    cursor: pointer;
+    border-bottom: thin solid black;
 }
 
 .code {
     align-self: center;
     margin: 1em auto;
     font-size: 1.3em;
-    background-color: rgb(202, 238, 192);
+    background-color: rgb(236, 255, 231);
     border: solid;
     border-color: #2c2c2c;
     border-radius: 0.5em;
     border-width: 0.01em;
-}
-
-.code-text {
-    padding: 0.3em;
-}
-
-.text-indent {
-    text-indent: 1em;
-}
-
-.code-block {
-    justify-content: center;
-}
-
-.whitespace-pre-line {
-    white-space: pre-line;
-}
-
-.no-decoration {
-    list-style-type: none;
-}
-
-.info-margin-top {
-    margin-top: 1em;
+    width:100%;
 }

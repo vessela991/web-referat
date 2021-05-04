@@ -2,188 +2,248 @@
 <html>
     <head>
       <meta charset="utf-8">
+      <title>Nginx</title>
       <link rel="stylesheet" href="css/style.css">
       <link rel="icon" href="img/logo.png" type="image/icon type">
     </head>
     <body>
         <header>
-          <div class="nav">
-            <img class="logo" src="img/logo-nav.png"/>
+          <nav class="nav">
+            <img class="logo" src="img/logo-nav.png" alt="Nginx лого" onclick="window.location.href='referat.html'"/>
             <button class = "button button-active" id="for-nginx-btn" onclick="showHtmlDiv('for-nginx')">За nginx</button>
             <button class = "button" id="architecture-btn" onclick="showHtmlDiv('architecture')">Архитектура</button>
             <button class = "button" id="configuration-btn" onclick="showHtmlDiv('configuration')">Конфигурация</button>
             <button class = "button" id="virtualHosts-btn" onclick="showHtmlDiv('virtualHosts')">Виртуални хостове</button>
             <button class = "button" id="demo-btn" onclick="showHtmlDiv('demo')">Демо</button>
-            <button class = "button" id="references-btn" onclick="showHtmlDiv('references')">Източници</button>
-          </div>
+          </nav>
         </header>
         <main>
-          <article class="display-flex" id="for-nginx">
-            <h3 class="article-header">Какво е уеб сървър?</h3>
+          <section class="section display-flex" id="for-nginx">
+            <header>       
+              <h3 class="section-header">Какво е уеб сървър?</h3>            
+            </header>
 
-            <div class="image-container">
-              <img class="image" src="img/webserver.png"/>
-              <p><i>Източник: https://ruslanspivak.com/lsbaws-part1/</i></p>
-            </div>
+            <figure class="image-container">
+              <img class="image" src="img/webserver.png" alt="Кратко обяснение на уебсървър"/>
+              <figcaption>Фигура 1. Какво е уеб сървър и как работи. Източник: <a href="https://ruslanspivak.com/lsbaws-part1/" target="_blank">https://ruslanspivak.com/lsbaws-part1</a></figcaption>
+            </figure>
 
-            <p class="article-paragraph">
-              Уеб сървърът предоставя съдържанието на даден уебсайт (например текста, изображенията, информация от приложението) на клиента, който го изисква(рекуества). В общия случай нека приемем, че клиентът е уеб браузера, който изисква(рекуества) информация при клик на бутон от потребителя. 
+            <p class="section-paragraph">
+              Уеб сървърът предоставя съдържанието на даден уебсайт (например текста, изображенията, информация от приложението) на клиента, който го изисква(рекуества). В общия случай нека приемем, че клиентът е уеб браузера, който изисква(рекуества) информация при клик на бутон от потребителя.
+              <a href="#ref_01_for_nginx">[1]</a>
             </p>
-            <p class="article-paragraph">
+            <p class="section-paragraph">
               Уеб сървъра може да хоства повече от един уеб сайт(домейн), ползвайки едни и същи хардуерни ресурси, което е известно като „виртуален хостинг“. Освен за хостване на сайтове в интернет, уеб сървърите се ползват и за комуникация между уеб клиенти и сървъри в локална мрежа, например тази на работа. Пример за по-интересна употреба: има камери с вграден уеб сървър, което значи, че потребителят може да управлява камерата си чрез уеб браузър.
+              <a href="#ref_01_for_nginx">[1]</a>
             </p>
-            <p class="article-paragraph">
+            <p class="section-paragraph">
               Сега след като разбрахме какво е уеб сървър, можем да навлезем в nginx.
             </p>
-            <h3 class="article-header">Какво представлява nginx?</h3>
-            <p class="article-paragraph">
-              NginX, NGINX, или просто nginx (различни начини за изписване, всички са правилни), произнася се „енджинекс“, е проект с отворен код, създаден през 2004г. от Игор Сисоев. Основната цел тогава е била да разреши C10K проблема, или иначе най-просто казано идеята е била да се направи уеб сървър, който да може да обслужва огромно количество клиенти(заявки) по едно и също време. 
+            <h3 class="section-header">Какво представлява nginx?</h3>
+            <p class="section-paragraph">
+              NginX, NGINX, или просто nginx (различни начини за изписване, всички са правилни), произнася се „енджинекс“, е проект с отворен код, създаден през 2004г. от Игор Сисоев. Основната цел тогава е била да разреши C10K проблема<a href="#ref_04_for_nginx">[4]</a>, или иначе най-просто казано идеята е била да се направи уеб сървър, който да може да обслужва огромно количество клиенти(заявки) по едно и също време. 
+              <a href="#ref_03_for_nginx">[3]</a>
             </p>
-            <p class="article-paragraph">
+            <p class="section-paragraph">
               Основните приложения на nginx са за HTTP сървър, обратно прокси(reverse proxy), лоуд балансер (load balancer), също така и  IMAP/POP3 прокси сървър. Използван е от 33.7% от уеб сайтовете, някои от по-големите и познати клиенти са Netflix, Pinterest, CloudFlare, Airbnb, WordPress.com, GitHub, Eventbrite, Heroku и много други. 
+              <a href="#ref_03_for_nginx">[3]</a>
             </p>
-            <p class="article-paragraph">
+            <p class="section-paragraph">
               За да разберем по-добре как функционира nginx, ще си позволя да направя едно сравнение с Apache(също уеб сървър). Apache работи на принципа рекуест=нишка, тоест всяка нова заявка се пуска на отделна нишка. При nginx обаче нещата стоят по малко по-различен начин. Използват се събития(event-driven approach), което се оказва в пъти по-бързо и леко, все пак тук говорим за асинхронни операции! Интересното е, че причините да се направи по този начин са проблемите на Apache със скалируемостта и производителността, а целта на nginx е да ги пребори. 
+              <a href="#ref_02_for_nginx">[2]</a>
             </p>
-          </article>
+            <footer class="references">
+              <h3 class="position">Източници за страницата</h3>
+              <p id="ref_01_for_nginx">[1]Web server, Nginx official website<a href="https://www.nginx.com/resources/glossary/web-server/" target="_blank">(https://www.nginx.com/resources/glossary/web-server/)</a></p>
+              <p id="ref_03_for_nginx">[2]NGINX—Server Software With Event-Driven Architecture, by Steven Bradley on March 27, 2018<a href="https://vanseodesign.com/web-design/nginx-web-server/" target="_blank">(https://vanseodesign.com/web-design/nginx-web-server/)</a></p>
+              <p id="ref_04_for_nginx">[3]Wiki Nginx, last edited on 12 April 2021, at 17:25 (UTC),<a href="https://en.wikipedia.org/wiki/Nginx" target="_blank">(https://en.wikipedia.org/wiki/Nginx)</a></p>
+              <p id="ref_05_for_nginx">[4]C10k Problem, last edited on 22 March 2021, at 15:30 (UTC),<a href="https://en.wikipedia.org/wiki/C10k_problem" target="_blank">(https://en.wikipedia.org/wiki/C10k_problem)</a></p>
+            </footer>
+          </section>
 
-          <article class="display-none" id="architecture">
-            <h3 class="article-header">Архитектура на nginx</h3>
-            <p class="article-paragraph">Нека първо направим разяснение относно <i>процеси, нишки, събития, синхронни и асинхронни операции</i>, за да схванем идеята на архитектурата.</p>
-            <p class="article-paragraph"><b>Процес</b> е всяка заредена в паметта програма, заедно с нейните ресурси. Ако имаме 5 инстанции на програмата, казваме, че имаме 5 отделни процеса. Процесите са независими един от друг. <b>Нишката</b> от друга страна е част от процеса. Има еднонишкови и многонишкови приложения, при една нишка няма нещо особено и интересно, но ако разгледаме многонишковите приложения веднага виждаме какво ги отличава – нишките в един процес споделят общи ресурси, комуникацията между нишките на един процес е доста по-бърза, отколкото между различните процеси. Един пример за процеси и нишки – създателите на Google Chrome са решили да ползват отделни процеси за всеки отделен отворен прозорец в браузера, което от своя страна има доста плюсове – защита на приложението от бъгове в машината за рендериране (целта й е да трансформира HTML-а и другите ресурси на устройството на потребителя), също така се ограничава достъпа на една такава машина до друга (понеже са отделни процеси).</p>
-            <p class="article-paragraph">Синхронните операции са блокиращи, тоест главната нишка се блокира, докато не се получи отговор(респонс). Асинхронните не са блокиращи, тъй като операцията се пуска на друга нишка(блокира се конкретната нишка) и по този начин освобождава главната нишка (main thread).</p>
-            <p class="article-paragraph">Архитектура, базирана на събития, означава, че приложението изпраща и консумира събития(Produce/Consume), а самото събитие е някакво действие, промяна на състоянието.</p>
-            <p class="article-paragraph">Повечето уеб сървъри(включително Apache) използват архитектура, базирана на нишки и процеси, която е по-проста и лесна за имплементиране, но не скалира добре в случаите, когато трябва да се обработят хиляди едновременни връзки(connections). В основата на nginx е архитектурата, базирана на събития.</p>
+          <section class="section display-none" id="architecture">
+            <header>
+              <h3 class="section-header">Архитектура на nginx</h3>
+            </header>
+
+            <p class="section-paragraph">Нека първо направим разяснение относно процеси, нишки, събития, синхронни и асинхронни операции, за да схванем идеята на архитектурата.</p>
+            <p class="section-paragraph"><b>Процес</b> е всяка заредена в паметта програма, заедно с нейните ресурси. Ако имаме 5 инстанции на програмата, казваме, че имаме 5 отделни процеса. Процесите са независими един от друг. <b>Нишката</b> от друга страна е част от процеса. Има еднонишкови и многонишкови приложения, при една нишка няма нещо особено и интересно, но ако разгледаме многонишковите приложения веднага виждаме какво ги отличава – нишките в един процес споделят общи ресурси, комуникацията между нишките на един процес е доста по-бърза, отколкото между различните процеси. Един пример за процеси и нишки – създателите на Google Chrome са решили да ползват отделни процеси за всеки отделен отворен прозорец в браузера, което от своя страна има доста плюсове – защита на приложението от бъгове в машината за рендериране (целта й е да трансформира HTML-а и другите ресурси на устройството на потребителя), също така се ограничава достъпа на една такава машина до друга (понеже са отделни процеси).
+              <a href="#ref_01_architecture">[1]</a>
+            </p>
+            <p class="section-paragraph">Синхронните операции са блокиращи, тоест главната нишка се блокира, докато не се получи отговор(респонс). Асинхронните не са блокиращи, тъй като операцията се пуска на друга нишка(блокира се конкретната нишка) и по този начин освобождава главната нишка (main thread).
+              <a href="#ref_02_architecture">[2]</a>
+            </p>
+            <p class="section-paragraph">Архитектура, базирана на събития, означава, че приложението изпраща и консумира събития(Produce/Consume), а самото събитие е някакво действие, промяна на състоянието.</p>
+            <p class="section-paragraph">Повечето уеб сървъри(включително Apache) използват архитектура, базирана на нишки и процеси, която е по-проста и лесна за имплементиране, но не скалира добре в случаите, когато трябва да се обработят хиляди едновременни връзки(connections). В основата на nginx е архитектурата, базирана на събития.
+              <a href="#ref_03_architecture">[3]</a>
+            </p>
             
-            <div class="image-container">
-              <img class="image" src="img/architecture.png"/>
-              <p><i>Архитектура на nginx. Източник: nginx.com</i></p>
-            </div>
+            <figure class="image-container">
+              <img class="image" src="img/architecture.png" alt="Архитектура на Nginx"/>
+              <figcaption>Фигура 2. Архитектура на nginx. Източник: nginx.com</figcaption>
+            </figure>
 
-            <p class="article-paragraph">Nginx използва горепоказания модел спрямо хардуерните ресурси, които машината има.</p>
-            <p class="article-paragraph">В основата е Master процесът, който е отговорен за операциите, за които са нужни привилегии, например четене на конфигурация, байндване на портове и създаването на child процеси(workers, cache loader, cache manager).</p>
-            <p class="article-paragraph">Cache loader процесът започва още при стартиране, за да зареди кеша в паметта, след това процесът приключва. Не изисква много ресурси.</p>
-            <p class="article-paragraph">Cache manager процесът се стартира периодично, за да изтрие кеширани записи в кешовете, като това се прави, за да не надвишава размера, който е в конфигурацията.</p>
-            <p class="article-paragraph">Worker процесите реално вършат цялата работа, те са еднонишкови и понеже са процеси, работят самостоятелно, като всеки слуша за събития(HTTP connection заявки). Когато има събитие, то се обработва асинхронно и не блокира другите събития.</p>
-            <p class="article-paragraph">Препоръчителната конфигурация е да се пусне по един worker процес за всяко ядро.</p>
-          </article>
+            <p class="section-paragraph">Nginx използва горепоказания модел спрямо хардуерните ресурси, които машината има.
+              <a href="#ref_03_architecture">[3]</a>
+            </p>
+            <p class="section-paragraph">В основата е Master процесът, който е отговорен за операциите, за които са нужни привилегии, например четене на конфигурация, байндване на портове и създаването на child процеси(workers, cache loader, cache manager).
+              <a href="#ref_03_architecture">[3]</a>
+            </p>
+            <p class="section-paragraph">Cache loader процесът започва още при стартиране, за да зареди кеша в паметта, след това процесът приключва. Не изисква много ресурси.
+              <a href="#ref_03_architecture">[3]</a>
+            </p>
+            <p class="section-paragraph">Cache manager процесът се стартира периодично, за да изтрие кеширани записи в кешовете, като това се прави, за да не надвишава размера, който е в конфигурацията.
+              <a href="#ref_03_architecture">[3]</a>
+            </p>
+            <p class="section-paragraph">Worker процесите реално вършат цялата работа, те са еднонишкови и понеже са процеси, работят самостоятелно, като всеки слуша за събития(HTTP connection заявки). Когато има събитие, то се обработва асинхронно и не блокира другите събития.</p>
+            <p class="section-paragraph">Препоръчителната конфигурация е да се пусне по един worker процес за всяко ядро.
+              <a href="#ref_03_architecture">[3]</a>
+            </p>
+            <footer class="references">
+              <h3 class="position">Източници за страницата</h3>
+              <p id="ref_01_architecture">[1]What’s the Diff: Programs, Processes, and Threads, August 16, 2017 by Roderick Bauer<a href="https://www.backblaze.com/blog/whats-the-diff-programs-processes-and-threads/" target="_blank">(https://www.backblaze.com/blog/whats-the-diff-programs-processes-and-threads/)</a></p>
+              <p id="ref_02_architecture">[2]Synchronous vs Asynchronous, Prasun Dewan 2006-02-02<a href="https://www.cs.unc.edu/~dewan/242/s07/notes/ipc/node9.html" target="_blank">(https://www.cs.unc.edu/~dewan/242/s07/notes/ipc/node9.html)</a></p>
+              <p id="ref_03_architecture">[3]Inside NGINX: How We Designed for Performance & Scale, Owen Garrett of F5  June 10, 2015<a href="https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/" target="_blank">(https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/)</a></p>
+            </footer>
+          </section>
 
-          <article class="display-none" id="configuration">
-            <h3 class="article-header">Как да използваме/конфигурираме nginx?</h3>
-            <p class="article-paragraph">Конфигурационният файл се състои от директиви. Чрез него се управляват nginx модулите. Директивите са два вида: прости директиви и блокови директиви. </p>
-            <p class="article-paragraph">Проста директива(simple) се състои от име и параметри, разделени със спейсове, като завършва с (;). </p>
-            <p class="article-paragraph">Блоковата директива има същата структура като простата, но завършва с ({ и }) вместо с (;). Това дава възможност тя да съдържа в себе си други директиви, а това се нарича „контекст“. Например директивите http, server, location. </p>
+          <section class="section display-none" id="configuration">
+            <header>
+              <h3 class="section-header">Как да използваме/конфигурираме nginx?</h3>
+            </header>
+
+            <p class="section-paragraph">Конфигурационният файл се състои от директиви. Чрез него се управляват nginx модулите. Директивите са два вида: прости директиви и блокови директиви.
+              <a href="#ref_01_configuration">[1]</a>
+            </p>
+            <p class="section-paragraph">Проста директива(simple) се състои от име и параметри, разделени със спейсове, като завършва с (;).
+            </p>
+            <p class="section-paragraph">Блоковата директива има същата структура като простата, но завършва с ({ и }) вместо с (;). Това дава възможност тя да съдържа в себе си други директиви, а това се нарича „контекст“. Например директивите http, server, location.
+            </p>
             
-            <div class="code">
-              <p class="code-text">worker_rlimit_nofile 8192; #проста директива</p>
-              <p class="code-text">  events { #блокова директива</p>
-              <p class="code-text text-indent">worker_connections  4096;</p>
-              <p class="code-text">}</p>
-            </div>
-            <!-- <div class="code code-block">
-              <pre>
-              worker_rlimit_nofile 8192; #проста директива
-              events {
-                worker_connections  4096;  #блокова директива
-              }
+            <pre class="code">
+              <code>
+                worker_rlimit_nofile 8192;    #проста директива
+                events {    #блокова директива
+                worker_connections 4096;
+                }</code>
+            </pre>
+            <p class="section-paragraph">Ако директива се намира извън контекст, то се счита, че тя е в главния(main) контекст. Например директивата http се намира в главния контекст, server се намира в http контекста, а location се намира в server контекста.</p>
+            
+            <pre class="code">
+              <code>
+                http { #блокова директива
+                  server { #блокова директива
+                  }
+                }</code>
               </pre>
-            </div> -->
-            <p class="article-paragraph">Ако директива се намира извън контекст, то се счита, че тя е в главния(main) контекст. Например директивата http се намира в главния контекст, server се намира в http контекста, а location се намира в server контекста.</p>
-            
-            <div class="code">
-              <p class="code-text">http { #блокова директива</p>
-              <p class="code-text text-indent"> server { #блокова директива</p>
-              <p class="code-text text-indent">} </p>
-              <p class="code-text">} </p>
-            </div>
           
-            <p class="article-paragraph">Вече знаем как се изгражда конфигурационния файл, сега остава да разберем как да го напишем така, че да ни върши работа. </p>
-            <p class="article-paragraph">За да можем да визуализираме нашите статични ресурси – статични html страници, изображения, трябва да направим следното:</p>
-            <p class="article-paragraph">Понеже нашите ресурси се намират в различни папки, например html страниците са в /home/www, а изображенията са в /home/images, то ще трябва да обозначим, че имаме две различни локации, тоест ще трябва да направим промени в блока http, където е блокът server, където пък се намира блокът location – там ще трябва да добавим съответните location блокове.</p>
+            <p class="section-paragraph">Вече знаем как се изгражда конфигурационния файл, сега остава да разберем как да го напишем така, че да ни върши работа. </p>
+            <p class="section-paragraph">За да можем да визуализираме нашите статични ресурси – статични html страници, изображения, трябва да направим следното:</p>
+            <p class="section-paragraph">Понеже нашите ресурси се намират в различни папки, например html страниците са в /home/www, а изображенията са в /home/images, то ще трябва да обозначим, че имаме две различни локации, тоест ще трябва да направим промени в блока http, където е блокът server, където пък се намира блокът location – там ще трябва да добавим съответните location блокове.</p>
            
-            <div class="code">
-              <p class="code-text">server {</p>
-              <p class="code-text text-indent">location / {</p>
-              <p class="code-text text-indent">root /home/www;</p>
-              <p class="code-text text-indent">}</p>
-              <p class="code-text text-indent">location /images/ {</p>
-              <p class="code-text text-indent">root /home;</p>
-              <p class="code-text text-indent">}</p>
-              <p class="code-text">}</p>
-            </div>
+            <pre class="code">
+              <code>
+                server {
+                  location / {
+                    root /home/www;
+                  }
+                  
+                  location /images/ {
+                    root /home;
+                  }
+                }</code>
+              </pre>
 
-            <p class="article-paragraph">За да се определи рекуестът към кой location ще отиде, се взима параметъра (тоест в двата случая съответно „/“ и „/images/“). Ако например имаме рекуест от http://localhost/images/example.png , то мачваме „/images/“. Какво обаче става, ако имаме повече от един location, който мачва даден URI? Взима се най-дългия префикс, тоест най-дългия location. В нашия пример по-горе „/“ също мачва, но е по-къс префикст от „/images/“. Пояснение: root също е директива, идеята е, че ползваме нея за мачване, тоест добавяме /images/ към root /home;</p>
+            <p class="section-paragraph">За да се определи рекуестът към кой location ще отиде, се взима параметъра (тоест в двата случая съответно „/“ и „/images/“). Ако например имаме рекуест от http://localhost/images/example.png , то мачваме „/images/“. Какво обаче става, ако имаме повече от един location, който мачва даден URI? Взима се най-дългия префикс, тоест най-дългия location. В нашия пример по-горе „/“ също мачва, но е по-къс префикст от „/images/“. Пояснение: root също е директива, идеята е, че ползваме нея за мачване, тоест добавяме /images/ към root /home;</p>
             
-            <h3 class="article-header">Конфигуриране на прокси сървър</h3>
+            <h4 class="section-header">Конфигуриране на прокси сървър</h4>
 
-            <p class="article-paragraph">Една от най-честите употреби на nginx е като прокси сървър, което значи, че приема рекуестите,предава ги на сървърите, които стоят зад него (сървърите,които са проксирани), взима отговор от тях и го връща на потребителя.</p>
-            <p class="article-paragraph">Ще конфигурираме много простичък прокси сървър, като използваме предните примери. Ще го конфигурираме така че рекуестите, които са за изображенията, да минават директно към локалната директория, а всички други ще се изпращат до проксирания сървър. </p>
-            <p class="article-paragraph">Понеже nginx ни дава възможност да дефинираме повече от един сървър, ще дефинираме нашите два сървъра на единствената ни nginx инстанция.  Първо ще дефинираме прокси сървъра като добавим още един server блок:</p>
-            <div class="code">
-              <p class="code-text">server {</p>
-              <p class="code-text text-indent">listen 8080;</p>
-              <p class="code-text text-indent">root /home/up1;</p>
-            
-              <p class="code-text text-indent">location / {</p>
-              <p class="code-text text-indent">}</p>
-              <p class="code-text">}</p>
-            </div>
+            <p class="section-paragraph">Една от най-честите употреби на nginx е като прокси сървър, което значи, че приема рекуестите,предава ги на сървърите, които стоят зад него (сървърите,които са проксирани), взима отговор от тях и го връща на потребителя.</p>
+            <p class="section-paragraph">Ще конфигурираме много простичък прокси сървър, като използваме предните примери. Ще го конфигурираме така че рекуестите, които са за изображенията, да минават директно към локалната директория, а всички други ще се изпращат до проксирания сървър. </p>
+            <p class="section-paragraph">Понеже nginx ни дава възможност да дефинираме повече от един сървър, ще дефинираме нашите два сървъра на единствената ни nginx инстанция.  Първо ще дефинираме прокси сървъра като добавим още един server блок:</p>
+            <pre class="code">
+              <code>
+                server {
+                  listen 8080;
+                  root /home/up1;
+                  
+                  location / {
+                  }
+                }</code>
+              </pre>
               
           
-            <p class="article-paragraph">Това е сървър, който слуша на порт 8080 и мапва(насочва) всички рекуести към /data/up1 директорията на локалната файлова система. Създаваме файл index.html и го слагаме в директорията.</p>
-            <p class="article-paragraph">След това ще използваме предната конфигурация на сървъра, като ще я променим така че да стане за прокси сървър (добавяме директивата proxy_pass http://localhost:8080; ), като тя ни указва името и порта на проксирания сървър, тоест localhost:8080.</p>
+            <p class="section-paragraph">Това е сървър, който слуша на порт 8080 и мапва(насочва) всички рекуести към /data/up1 директорията на локалната файлова система. Създаваме файл index.html и го слагаме в директорията.</p>
+            <p class="section-paragraph">След това ще използваме предната конфигурация на сървъра, като ще я променим така че да стане за прокси сървър (добавяме директивата proxy_pass http://localhost:8080; ), като тя ни указва името и порта на проксирания сървър, тоест localhost:8080.</p>
             
-            <div class="code">
-              <p class="code-text">server {</p>
-              <p class="code-text text-indent">location / {</p>
-              <p class="code-text text-indent">proxy_pass http://localhost:8080;</p>
+            <pre class="code">
+              <code>
+                server {
+
+                  location / {
+                  proxy_pass http://localhost:8080;
+                  }
+                  
+                  location /images/ {
+                  root /home;
+                  }
+                  
+                }</code>
+              </pre> 
             
-              <p class="code-text text-indent">}</p>
-              <p class="code-text text-indent">location /images/ {</p>
-              <p class="code-text text-indent">root /home;</p>
-              <p class="code-text text-indent">}</p>
-            
-              <p class="code-text">}</p>
-            </div> 
-            
-            <p class="article-paragraph">Ще променим втория location блок, като ще направим така че да използва регулярен израз и конкретен суфикс, тоест вече имаме блок, който мачва всички URI, които завършват с .jpg, .gif, .png и ги насочва към папката /home/images</p>
+            <p class="section-paragraph">Ще променим втория location блок, като ще направим така че да използва регулярен израз и конкретен суфикс, тоест вече имаме блок, който мачва всички URI, които завършват с .jpg, .gif, .png и ги насочва към папката /home/images</p>
            
-            <div class="code">
-              <p class="code-text">server {</p>
-              <p class="code-text text-indent">location / {</p>
-              <p class="code-text text-indent">proxy_pass http://localhost:8080;</p>
-            
-              <p class="code-text text-indent">}</p>
-              <p class="code-text text-indent">location ~ \.(gif|jpg|png)$ {</p>
-              <p class="code-text text-indent">root /home/images;</p>
-              <p class="code-text text-indent">}</p>
-              <p class="code-text">}</p>
-            </div> 
+            <pre class="code">
+              <code>
+                server {
 
-            <p class="article-paragraph">Това беше накратко за тази конфигурация. В демо секцията може да следвате стъпките и сами да конфигурирате nginx!</p>
+                  location / {
+                  proxy_pass http://localhost:8080;
+                  }
+                  
+                  location ~ \.(gif|jpg|png)$ {
+                  root /home/images;
+                  }
+                  
+                }</code>
+              </pre> 
 
-          </article>
-          <article class="display-none" id="virtualHosts">
-            <h3 class="article-header">Nginx виртуални хостове?</h3>
-            <p class="article-paragraph">Виртуалните хостове в Nginx се наричат просто „сървър блокове“, тоест това са онези блокове server {} от конфигурацията.</p>
-            <p class="article-paragraph">Те позволяват да се хостват множество сайтове на един сървър. Хостването на множество сайтове на една единствена машина спестява пари(използваме една машина) и време(за конфигурация).</p>
-            <p class="article-paragraph">Всеки един домейн е самостоятелен, тоест той има отделна директория за файловете, отделни политики за сигурност, отделни ssl сертификати.</p>
-            <p class="article-paragraph">Пример:</p>
-            <p class="article-paragraph">Ще направим различни директории за нашите примерни домейни – domain1.com, domain2.com. Директориите трябва да са със следната структура:</p>
+            <p class="section-paragraph">Това беше накратко за тази конфигурация. В <span class="link" onclick="showHtmlDiv('demo')">Демо</span> секцията може да следвате стъпките и сами да конфигурирате nginx!</p>
+            <footer class="references">
+              <h3 class="position">Източници за страницата</h3>
+              <p id="ref_01_configuration">[1]Beginner’s Guide, Nginx official website, Last-Modified: Fri, 30 Apr 2021 11:06:54 GMT<a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank">(http://nginx.org/en/docs/beginners_guide.html)</a></p>
+            </footer>
+          </section>
+          <section class="section display-none" id="virtualHosts">
+            <header>
+              <h3 class="section-header">Nginx виртуални хостове?</h3>
+            </header>
+            <p class="section-paragraph">Виртуалните хостове в Nginx се наричат просто „сървър блокове“, тоест това са онези блокове server {} от конфигурацията.</p>
+            <p class="section-paragraph">Те позволяват да се хостват множество сайтове на един сървър. Хостването на множество сайтове на една единствена машина спестява пари(използваме една машина) и време(за конфигурация).
+              <a href="#ref_01_virtHosts">[1]</a>
+            </p>
+            <p class="section-paragraph">Всеки един домейн е самостоятелен, тоест той има отделна директория за файловете, отделни политики за сигурност, отделни ssl сертификати.
+              <a href="#ref_01_virtHosts">[1]</a>
+            </p>
+            <p class="section-paragraph">Пример:
+              <a href="#ref_02_virtHosts">[2]</a>
+            </p>
+            <p class="section-paragraph">Ще направим различни директории за нашите примерни домейни – domain1.com, domain2.com. Директориите трябва да са със следната структура:
+            </p>
             
-            <div class="code">
-              <pre class="whitespace-pre-line code-text">
+            <pre class="code">
+              <code>
                   /home/www/
                 ├── domain1.com
                 │   └── public_html
                 ├── domain2.com
-                │   └── public_html
-              </pre>
-            </div>
+                │   └── public_html</code>
+            </pre>
             
-            <p class="article-paragraph">Като в директориите с име public_html се съхраняват файловете на конкретния уебсайт. Създаваме в директорията /home/www/domain1.com/public_html файл с име index.html с примерно съдържание:</p>
+            <p class="section-paragraph">Като в директориите с име public_html се съхраняват файловете на конкретния уебсайт. Създаваме в директорията /home/www/domain1.com/public_html файл с име index.html с примерно съдържание:</p>
             
-            <pre class="whitespace-pre-line code-text code">
+            <pre class="code">
+              <code>
               &lt;!DOCTYPE html&gt;
               &lt;html lang="en" dir="ltr"&gt;
                 &lt;head&gt;
@@ -193,14 +253,14 @@
                 &lt;body&gt;
                   &lt;h1>Success! domain1.com home page!&lt;/h1&gt;
                 &lt;/body&gt;
-              &lt;/html&gt;
-          </pre>
+              &lt;/html&gt;</code>
+            </pre>
             
-            <p class="article-paragraph">Сега остава да конфигурираме server блоковете. Конфигурационния файл се намира в /etc/nginx/sites-available</p>
-            <p class="article-paragraph">Създаваме файл(препоръчително с името на домейна):</p>
+            <p class="section-paragraph">Сега остава да конфигурираме server блоковете. Конфигурационния файл се намира в /etc/nginx/sites-available</p>
+            <p class="section-paragraph">Създаваме файл(препоръчително с името на домейна):</p>
             
-            <div class="code">
-              <pre class="whitespace-pre-line code-text">
+            <pre class="code">
+              <code>
                 server {
                   listen 80;
                   listen [::]:80;
@@ -217,131 +277,117 @@
                   location / {
                       try_files $uri $uri/ =404;
                   }
-              }              
-              </pre>
-            </div>
+              }</code>
+            </pre>
 
-            <p class="article-paragraph">За да работи nginx с файла, който направихме сега, е нужно да създадем symbolic link към /etc/nginx/sites-enabled/:</p>
+            <p class="section-paragraph">За да работи nginx с файла, който направихме сега, е нужно да създадем symbolic link към /etc/nginx/sites-enabled/:</p>
             
-            <div class="code code-text">sudo ln -s /etc/nginx/sites-available/domain1.com /etc/nginx/sites-enabled/</div>
+            <pre class="code">
+              <code>
+                sudo ln -s /etc/nginx/sites-available/domain1.com /etc/nginx/sites-enabled/</code>
+            </pre>
             
-            <p class="article-paragraph">Рестартираме nginx и вече имаме нов сървър блок. Подробно демо на тези стъпки може да се види в секция „Демо“. </p>
-            <p class="article-paragraph"></p>
-            <p class="article-paragraph"></p>
-            <p class="article-paragraph"></p>
+            <p class="section-paragraph">Рестартираме nginx и вече имаме нов сървър блок. Подробно демо на тези стъпки може да се види в секция <span class="link" onclick="showHtmlDiv('demo')">Демо</span>. </p>
+            <p class="section-paragraph"></p>
 
+            <footer class="references">
+              <h3 class="position">Източници за страницата</h3>
+              <p id="ref_01_virtHosts">[1]How To Set Up Nginx Virtual Host (Server Blocks) on CentOS 7, September 19, 2019, Sofija Simic<a href="https://phoenixnap.com/kb/how-to-set-up-nginx-server-blocks-virtual-hosts-centos-7" target="_blank">(https://phoenixnap.com/kb/how-to-set-up-nginx-server-blocks-virtual-hosts-centos-7)</a></p>
+              <p id="ref_02_virtHosts">[2]How To Set Up Nginx Server Blocks on Ubuntu 18.04, Updated  Jan 27, 2020, linuxize.com <a href="https://linuxize.com/post/how-to-set-up-nginx-server-blocks-on-ubuntu-18-04/" target="_blank">(https://linuxize.com/post/how-to-set-up-nginx-server-blocks-on-ubuntu-18-04/)</a></p>
+            </footer>
+          </section>
 
-          </article>
-          <article class="display-none" id="demo">
-            <h3 class="article-header">Демо</h3>
-            <p class="article-paragraph">В демото ще покажа как да инсталирате и конфигурирате nginx. Ще използвам docker for desktop, освен това ще ни е нужен и dockerhub акаунт.</p>
-            <p class="article-paragraph">Стъпка 1: Ще използваме ubuntu, за целта след като вече сме изтеглили docker for desktop и сме го пуснали, влизаме в cmd(windows) или терминала. Логваме се в dockerhub акаунта си с командата: <i>docker login</i></p>
-            <p class="article-paragraph">Стъпка 2: След успешен логин, вече можем да изтеглим имиджа на ubuntu. Изпълняваме комадата <i>docker pull ubuntu</i></p>
-            <img class="image" src="img/pull-ubuntu.png"/>
-            <p class="article-paragraph">Стъпка 3: Вдигаме контейнер с изтегления имидж. Това се случва с командата <i>docker run -it ubuntu:latest</i></p>
-            <p class="article-paragraph">Стъпка 4: Инсталиране на nginx. Това се случва с ubuntu package мениджъра, който е apt. Изпълняваме командите <i>apt update && apt install nginx</i>></p>
-            <img class="image" src="img/ubuntu-install-nginx.png"/>
-            <p class="article-paragraph">След тези стъпки вече трябва да имаме работещ nginx. За да верифицираме, правим curl. Понеже ubuntu не се шипва с кърл, ще трябва да го инсталираме с apt.            </p>
-            <p class="article-paragraph">apt install curl</p>
-            <p class="article-paragraph">Преди да пробваме дали работи, ще трябва все пак да стартираме nginx с командата service nginx start</p>
-            <p class="article-paragraph">Вече имаме curl и можем да изпълним <i>curl http://localhost</i></p>
-            <img class="image" src="img/nginx-installed.png"/>
-            <p class="article-paragraph">След като верифицирахме, че работи, вече можем да направим първия си виртуален хост. По дефолт html файловете са в директорията /var/www , но ние ще направим нова директория там, която ще е за нашия виртуален хост</p>
-            <p class="article-paragraph">cd /var/www</p>
-            <p class="article-paragraph">sudo mkdir tutorial</p>
-            <p class="article-paragraph">cd tutorial</p>
-            <p class="article-paragraph">vim index.html</p>
-            <p class="article-paragraph">Внимание! На убунту контейнера също липсва и vim, така че ще трябва да се инсталира допълнително с командата apt install vim</p>
-            <p class="article-paragraph">Във файла index.html поставяме следния html:</p>
-            <pre class="whitespace-pre-line code-text code">
-              &lt;!doctype html&gt;
+          <section class="section display-none" id="demo">
+            <header>
+              <h3 class="section-header">Демо</h3>
+            </header>
+
+            <p class="section-paragraph">В демото ще покажа как да инсталирате и конфигурирате nginx. Ще използвам docker for desktop, освен това ще ни е нужен и dockerhub акаунт.</p>
+            <p class="section-paragraph"><a href="https://www.docker.com/products/docker-desktop" target="_blank">Към сайта за изтегляне на docker for desktop</a></p>
+            <p class="section-paragraph"><a href="https://hub.docker.com/" target="_blank">Към сайта за регистриране на dockerhub account</a></p>
+            <p class="section-paragraph">Стъпка 1: Ще използваме ubuntu, за целта след като вече сме изтеглили docker for desktop и сме го пуснали, влизаме в cmd(windows) или терминала. Логваме се в dockerhub акаунта си с командата:</p>
+            <p class="section-paragraph italic code">docker login</p>
+            <p class="section-paragraph">Стъпка 2: След успешен логин, вече можем да изтеглим имиджа на ubuntu. Изпълняваме комадата:</p>
+            <p class="section-paragraph italic code">docker pull ubuntu</p>
+            
+            <figure class="image-container">
+              <img class="image" src="img/pull-ubuntu.png" alt="Изтегляне на ubuntu"/>
+              <figcaption>Фигура 3. Изтегляне на ubuntu image. Източник: авторът на реферата</figcaption>
+            </figure>
+
+            <p class="section-paragraph">Стъпка 3: Вдигаме контейнер с изтегления имидж. Това се случва с командата</p>
+            <p class="section-paragraph italic code">docker run -it ubuntu:latest</p>
+            <p class="section-paragraph">Стъпка 4: Инсталиране на nginx. Това се случва с ubuntu package мениджъра, който е apt. Изпълняваме командите:</p>
+            <p class="section-paragraph italic code">apt update && apt install nginx</p>
+            
+            <p class="section-paragraph">След тези стъпки вече трябва да имаме работещ nginx. За да верифицираме, правим curl. Понеже ubuntu не се шипва с кърл, ще трябва да го инсталираме с apt.            </p>
+            <p class="section-paragraph italic code">apt install curl</p>
+            <p class="section-paragraph">Преди да пробваме дали работи, ще трябва все пак да стартираме nginx с командата:</p>
+            <p class="section-paragraph italic code">service nginx start</p>
+            <p class="section-paragraph">Вече имаме curl и можем да изпълним</p>
+            <p class="section-paragraph italic code">curl http://localhost</p>
+            
+            <figure class="image-container">
+              <img class="image" src="img/nginx-installed.png" alt="Верифициране инсталацията на nginx"/>
+              <figcaption>Фигура 5. Верифициране работата на nginx. Източник: авторът на реферата</figcaption>
+            </figure>
+
+            <p class="section-paragraph">След като верифицирахме, че работи, вече можем да направим първия си виртуален хост. По дефолт html файловете са в директорията /var/www , но ние ще направим нова директория там, която ще е за нашия виртуален хост</p>
+            <p class="section-paragraph italic code">cd /var/www</p>
+            <p class="section-paragraph italic code">sudo mkdir tutorial</p>
+            <p class="section-paragraph italic code">cd tutorial</p>
+            <p class="section-paragraph italic code">vim index.html</p>
+            <p class="section-paragraph">Внимание! На убунту контейнера също липсва и vim, така че ще трябва да се инсталира допълнително с командата:</p>
+            <p class="section-paragraph italic code">apt install vim</p>
+            <p class="section-paragraph">Във файла index.html поставяме следния html:</p>
+            <pre class="code">
+              <code>
+                &lt;!DOCTYPE html&gt;
                 &lt;html&gt;
                 &lt;head&gt;
                   &lt;meta charset="utf-8"&gt;
                   &lt;title>Hello, Nginx!&lt;/title&gt;
-              &lt;/head&gt;
-              &lt;body&gt;
-                &lt;h1>Hello, Nginx!&lt;/h1&gt;
-                &lt;p>We have just configured our Nginx web server on Ubuntu Server!&lt;/p&gt;
-              &lt;/body&gt;
-              &lt;/html&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                  &lt;h1>Hello, Nginx!&lt;/h1&gt;
+                  &lt;p>We have just configured our Nginx web server on Ubuntu Server!&lt;/p&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;</code>
             </pre>            
-            <p class="article-paragraph">Вече имаме файла и е време да създадем виртуалния хост. Както споменах в раздел “Виртуални хостове”, конфигурациите се намират в директорията /etc/nginx/sites-enabled Изпълняваме:</p>
-            <p class="article-paragraph">cd /etc/nginx/sites-enabled</p>
-            <p class="article-paragraph">vim tutorial</p>
-            <p class="article-paragraph">Във файла tutorial поставяме следния код:</p>
-            <pre class="whitespace-pre-line code-text code">
-              server {
-                listen 81;
-                listen [::]:81;
-         
-                server_name example.ubuntu.com;
-         
-                root /var/www/tutorial;
-                index index.html;
-         
-                location / {
-                        try_files $uri $uri/ =404;
-                }
-            }
+            <p class="section-paragraph">Вече имаме файла и е време да създадем виртуалния хост. Както споменах в раздел “Виртуални хостове”, конфигурациите се намират в директорията /etc/nginx/sites-enabled Изпълняваме:</p>
+            <p class="section-paragraph italic code">cd /etc/nginx/sites-enabled</p>
+            <p class="section-paragraph italic code">vim tutorial</p>
+            <p class="section-paragraph">Във файла tutorial поставяме следния код:</p>
+            <pre class="code">
+              <code>
+                server {
+                  listen 81;
+                  listen [::]:81;
+           
+                  server_name example.ubuntu.com;
+           
+                  root /var/www/tutorial;
+                  index index.html;
+           
+                  location / {
+                          try_files $uri $uri/ =404;
+                  }
+                }</code>
             </pre> 
             
-            <p class="article-paragraph">Почти сме готови, остана само да рестартираме nginx</p>
-            <p class="article-paragraph">service nginx restart</p>
-            <p class="article-paragraph">и отново да направим curl, този път на порт 81</p>
-            <img class="image" src="img/tutorial-virthost.png"/>
+            <p class="section-paragraph">Почти сме готови, остана само да рестартираме nginx</p>
+            <p class="section-paragraph italic code">service nginx restart</p>
+            <p class="section-paragraph">и отново да направим curl, този път на порт 81</p>
+            <figure class="image-container">
+              <img class="image" src="img/tutorial-virthost.png" alt="Виртуален хост верифициране"/>
+              <figcaption>Фигура 6. Верифициране, че виртуалният хост работи. Източник: авторът на реферата</figcaption>
+            </figure>
 
-          </article>
-          <article class="display-none" id="references">
-            <h3 class="article-header">Източници</h3>
-            <p class="article-paragraph info-margin-top">За страницата 'За nginx':</p>
-            <ul class="no-decoration">
-              <li class="article-paragraph">
-                <a href="https://www.nginx.com/resources/glossary/web-server/" target="_blank">Web server</a>
-              </li>
-              <li class="article-paragraph">
-                <a href="https://vanseodesign.com/web-design/nginx-web-server/" target="_blank">Nginx web server</a>
-              </li>
-              <li class="article-paragraph">
-                <a href="https://en.wikipedia.org/wiki/Nginx" target="_blank">Wiki Nginx</a>
-              </li>
-              <li class="article-paragraph">
-                <a href="https://en.wikipedia.org/wiki/C10k_problem" target="_blank">C10k Problem</a>
-              </li>
-            </ul>
-            <p class="article-paragraph info-margin-top">За страницата 'Архитектура':</p>
-            <ul class="no-decoration">
-              <li class="article-paragraph">
-                <a href="https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/" target="_blank">Nginx Performance and Scale</a>
-              </li>
-              <li class="article-paragraph">
-                <a href="https://www.backblaze.com/blog/whats-the-diff-programs-processes-and-threads/" target="_blank">Процеси и нишки</a>
-              </li>
-              <li class="article-paragraph">
-                <a href="https://www.cs.unc.edu/~dewan/242/s07/notes/ipc/node9.html" target="_blank">Синхронни и асинхронни операции</a>
-              </li>
-            </ul>
-            <p class="article-paragraph info-margin-top">За страницата 'Конфигурация':</p>
-            <ul class="no-decoration">
-              <li class="article-paragraph">
-                <a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank">Конфигуриране на nginx за начинаещи</a>
-              </li>
-            </ul>
-            <p class="article-paragraph info-margin-top">За страницата 'Виртуални хостове':</p>
-            <ul class="no-decoration">
-              <li class="article-paragraph">
-                <a href="https://phoenixnap.com/kb/how-to-set-up-nginx-server-blocks-virtual-hosts-centos-7" target="_blank">Какво са виртуални хостове в nginx</a>
-              </li>
-              <li class="article-paragraph">
-                <a href="https://linuxize.com/post/how-to-set-up-nginx-server-blocks-on-ubuntu-18-04/" target="_blank">Конфигуриране на виртуални хостове на Ubuntu</a>
-              </li>
-            </ul>
-
-          </article>
+          </section>
         </main>
         <footer>
           <div class="footer">
-            <p>Реферат по WEB технологии, 2020-2021</p>
+            <p>Реферат по WEB технологии на тема "Nginx. Архитектура, инсталиране, конфигуриране, виртуални хостове", 2020-2021</p>
           </div>
         </footer>
     </body>
