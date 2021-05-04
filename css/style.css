@@ -109,7 +109,6 @@
 
 .code {
     align-self: center;
-    margin: 1em auto;
     font-size: 1.3em;
     background-color: rgb(236, 255, 231);
     border: solid;
@@ -117,4 +116,8 @@
     border-radius: 0.5em;
     border-width: 0.01em;
     width:100%;
+}
+
+.code-block {
+    margin: 1em;
 }
